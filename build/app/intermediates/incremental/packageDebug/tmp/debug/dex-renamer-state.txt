@@ -1,0 +1,4 @@
+#Sat Oct 02 09:22:27 ICT 2021
+base.0=/home/man1505/Documents/Flutter/login_bloc/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
