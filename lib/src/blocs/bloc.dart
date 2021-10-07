@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'validators.dart';
+import 'package:rxdart/rxdart.dart';
 
 class Bloc with Validators {
-  final _email = StreamController<String>();
-  final _password = StreamController<String>();
+  final _email = BehaviorSubject<String>();
+  final _password = BehaviorSubject<String>();
 
   // Add data to stream
   Function(String) get emailChange => _email.sink.add;
@@ -12,8 +13,16 @@ class Bloc with Validators {
   // Change data
   Stream<String> get email => _email.stream.transform(valiadteEmail);
   Stream<String> get password => _password.stream.transform(validatePassword);
-
+  Stream<bool> get submitValid => CombineLatestStream.combine2(email, password, (e, p) => true);
   // Clean up controller
+
+  submit() {
+    final validEmail = _email.value;
+    final validPassword = _password.value;
+    print('Email is $validEmail');
+    print('Password is $validPassword');
+  }
+
   dispose() {
     _email.close();
     _password.close();
